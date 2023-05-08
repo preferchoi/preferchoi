@@ -37,6 +37,10 @@
 - openCV(하)
     - 기본적인 카메라 모듈을 만들고 사용할 수 있음.
     - mediapipe나 yolo를 이용해 물체를 검출하고 간단한 함수를 작성할 수 있음.
+- midjourney(중하)
+    - [프로필 링크](https://www.midjourney.com/app/users/a7ca0eb7-e838-4dee-942e-c0c0eb78cf59/)
+    - 생성 모델을 특정하여 이미지를 생성할 수 있음
+    - 각 생성 모델의 특징을 이해하고 사용할 수 있음
 
 <br>
 

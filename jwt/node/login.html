@@ -15,5 +15,16 @@
         <label for="password">password</label><input type="password" name="password" id="password" value="test">
         <button type="submit">login</button>
     </form>
+    <button type="submit" id="login_check">login_check</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const login_check = document.querySelector('#login_check')
+        login_check.addEventListener('click', () => {
+            axios.get('http://localhost:3000/login_check', {
+                'authorization':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjg1Njg3OTMwLCJleHAiOjE2ODU2OTE1MzB9.XGjbFZ1jakdBCVUGNB3nrTLq2P5C5bRo9xSHAs8eMi8"
+            })
+        })
+    </script>
+
 </body>
 </html>

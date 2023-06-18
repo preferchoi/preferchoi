@@ -73,6 +73,8 @@ Vue.js, chart.js
 - [chart.js](https://www.chartjs.org)를 활용하여 지출 내역과 같은 데이터를 시각화하였음.
 - prop, emit를 활용하여 상태 관리를 진행하였음.
     - 중첩 라우팅을 진행하였기 때문에, vuex를 활용해야 할 정도로 데이터 흐름이 넓게 퍼트려져 있지 않았다. 그렇기 때문에 vuex 모듈을 활용하지 않고 prop, emit을 활용하였다.
+- Selenium을 활용한 크롤링을 진행하였음.
+    - 카드 추천을 위한 데이터 수집을 위해 [카드고릴라](https://www.card-gorilla.com/home) 사이트에서 데이터 크롤링을 진행하고, .csv 파일로 저장하였다.
 
 
 

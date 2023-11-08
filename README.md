@@ -24,26 +24,22 @@
     - 기본적인 문법들을 이해하고 사용할 수 있음.
     - 비동기식 페이지를 작성할 수 있음
 
-- typescript(중)
-    - 타입스크립트를 왜 사용하는 지에 대해 알고 있음.
-    - 각 변수의 타입을 설정하여 타입 안정성을 강화하고 오류 처리 및 유지보수를 용히하게 할 수 있다.
+- reactjs(중)
+    - react의 문법을 이해하고 사용할 수 있음.
+    - react hook을 이해하고 사용 및 커스텀 할 수 있음.
 
 - vuejs(중)
     - vuex, vue-router를 이용한 클라이언트 서버 제작 가능.
     - vue 디렉티브를 이해하고 사용할 수 있음.
 
+- typescript(중)
+    - 타입스크립트를 사용하는 이유에 대해 알고 있음.
+    - 각 변수의 타입을 설정하여 타입 안정성을 강화하고 오류 처리 및 유지보수를 용히하게 할 수 있다.
+
 - expressjs(중)
-    - 간단한 서버 제작 가능
+    - 서버 제작 가능
     - DB연동하여 간단한 CRUD 작성 가능
-    - websocket 통신 사용 가능
-
-- openCV(하)
-    - 기본적인 카메라 모듈을 만들고 사용할 수 있음.
-    - mediapipe나 yolo를 이용해 물체를 검출하고 간단한 함수를 작성할 수 있음.
-
-- reactjs(하)
-    - react의 문법을 이해하고 사용할 수 있음.
-
+    - socket.io를 이용한 websocket 통신 서버 제작 가능
 
 
 <br>
@@ -124,44 +120,6 @@ Python, openCV, express.js, javascripts, mediapipe, Docker
     - dockerfile을 작성하고, docker hub를 활용하여 수동으로 배포하였다.
 
 
-## [Vuepygo](https://github.com/preferchoi/Vuepygo)
-
-### 1. 요약
-Vue, Python, Django를 이용한 영화 주제 웹 프로젝트
-
-### 2. 기간
-2022.11. ~ 2022.11.
-
-### 3. 역할
-- Django를 이용한 백엔드 제작
-- KNN 모델을 이용한 영화 추천 알고리즘 작성
-
-### 4. 기술 스택
-Python, Django, ML
-
-### 5. 활동
-- Django를 활용하여 기본 CRUD를 작성하였음.
-- pandas를 활용하여 데이터 정제 및 KNN 알고리즘을 활용한 추천 기능을 제작하였다.
-
-
-
-## [SaveUs](https://github.com/preferchoi/saveus.git)
-
-### 1. 요약
-물체 판별을 통한 분리수거 처리기 프로젝트
-
-### 2. 기간
-2020.10. ~ 2020.11.
-
-### 3. 역할
-- CNN 모델을 이용한 쓰레기 판별 모델 제작
-- flask를 이용한 쓰레기 분류 모델 연동
-- 모델 교육을 위한 이미지 데이터 크롤링
-
-### 4. 기술 스택
-python, flask, AI
-
-
 # 개인 프로젝트 및 학습
 ## [memoirs_AI](https://github.com/preferchoi/memoirs_AI)
 
@@ -172,9 +130,25 @@ chatGPT API를 활용한 AI 회고록 서비스
 react.js
 
 ### 3. 학습 내용
-vite를 이용한 프로젝트 생성과 create react app으로 생성한 프로젝트와의 차이에 대해 학습했다.
-chatGPT API 사용법에 대해 학습했다.
+- vite를 이용한 프로젝트 생성과 create react app으로 생성한 프로젝트와의 차이에 대해 학습했다.
+- chatGPT API 사용법에 대해 학습했다.
+
+
+## [websocketPJT](https://github.com/preferchoi/websocketPJT) (2023.10.20. ~ 2023.11.06.)
+
+### 1. 요약
+socket.io를 이용한 채팅 서비스 웹
+
+### 2. 기술 스택
+express.js, react.js, socket.io, socket.io-client, sharp.js
+
+### 3. 학습 내용
+- 풀스택 개발 과정의 장점과 그 책임에 대해 이해할 수 있었다.
+- socket.io를 활용한 웹 소켓 작동에 대해 이해할 수 있었다.
+- socket.io의 room 기능과 동적 라우팅을 사용한 namespace 배정의 차이와 장단점에 대해 이해했다.
+- 디바운싱과 쓰로틀링의 차이를 알고, 해당 기능을 작성할 수 있게 되었다.
+- sharp.js를 사용한 이미지 조작을 경험했다.
 
 <br>
 
-# 감사합니다!
+# 감사합니다.

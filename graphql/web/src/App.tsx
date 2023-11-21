@@ -6,7 +6,7 @@ import {
   Text,
   theme,
 } from "@chakra-ui/react"
-import FilmList from "./compnents/FilmList"
+import FilmList from "./compnents/film/FilmList"
 
 const apolloClient = new ApolloClient({
   uri: 'http://localhost:4000/graphql',

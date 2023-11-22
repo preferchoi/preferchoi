@@ -1,11 +1,12 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
+import CommonLayout from "../compnents/CommonLatout";
 import FilmList from '../compnents/film/FilmList';
 
 export default function Main(): React.ReactElement {
   return (
-    <Box>
-      <Heading size={"lg"}></Heading>
+    <CommonLayout>
+      <Heading size={"lg"}>최고의 장면을 찾아보세요</Heading>
       <FilmList />
-    </Box>
+    </CommonLayout>
   );
 }

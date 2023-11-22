@@ -1,0 +1,14 @@
+query Film($filmId: Int!) {
+  film(filmId: $filmId) {
+    id
+    title
+    subtitle
+    runningTime
+    director {
+      id
+      name
+    }
+    release
+    posterImg
+  }
+}

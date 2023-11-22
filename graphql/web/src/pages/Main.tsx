@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/react';
-import CommonLayout from "../compnents/CommonLatout";
+import CommonLayout from "../compnents/CommonLayout";
 import FilmList from '../compnents/film/FilmList';
 
 export default function Main(): React.ReactElement {

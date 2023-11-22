@@ -1,4 +1,5 @@
-import { Box, BackgroundProps, Flex } from '@chakra-ui/react';
+import { Box, BackgroundProps } from '@chakra-ui/react';
+import NavBar from './nav/NavBar';
 
 interface CommonLayoutProps {
   bg?: BackgroundProps['bg'];
@@ -11,9 +12,7 @@ export default function CommonLayout({
 }: CommonLayoutProps): React.ReactElement {
   return (
     <div>
-      <Flex maxW={'960px'} justify={'center'}>
-        네비바
-      </Flex>
+      <NavBar />
       <Box
         px={{ base: 4 }}
         pt={24}

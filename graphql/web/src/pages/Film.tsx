@@ -1,7 +1,8 @@
 import CommonLayout from '../compnents/CommonLayout';
 import { useParams } from 'react-router-dom';
-import { Box, Text, Spinner } from '@chakra-ui/react';
+import { Text, Spinner } from '@chakra-ui/react';
 import { useFilmQuery } from '../generated/graphql';
+import FilmDetail from '../compnents/film/FilmDetail';
 
 // interface FilmPageParams {
 //   filmId: string;
@@ -16,9 +17,11 @@ export default function Film(): React.ReactElement {
     <CommonLayout>
       {loading && <Spinner />}
       {error && <Text>페이지를 표시할 수 없습니다.</Text>}
-      <Box>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </Box>
+      {filmId && data?.film ? (
+        <FilmDetail film={data.film} />
+      ) : (
+        <Text>페이지를 표시할 수 없습니다.</Text>
+      )}
     </CommonLayout>
   );
 }

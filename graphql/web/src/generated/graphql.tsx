@@ -75,7 +75,7 @@ export type FilmQueryVariables = Exact<{
 }>;
 
 
-export type FilmQuery = { __typename?: 'Query', film?: { __typename?: 'Film', id: number, title: string, subtitle?: string | null, runningTime: number, release: string, posterImg: string, director: { __typename?: 'Director', id: number, name: string } } | null };
+export type FilmQuery = { __typename?: 'Query', film?: { __typename?: 'Film', id: number, title: string, subtitle?: string | null, description: string, genre: string, runningTime: number, release: string, posterImg: string, director: { __typename?: 'Director', id: number, name: string } } | null };
 
 export type FilmsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -92,6 +92,8 @@ export const FilmDocument = gql`
     id
     title
     subtitle
+    description
+    genre
     runningTime
     director {
       id

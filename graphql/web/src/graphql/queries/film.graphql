@@ -3,6 +3,8 @@ query Film($filmId: Int!) {
     id
     title
     subtitle
+    description
+    genre
     runningTime
     director {
       id

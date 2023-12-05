@@ -6,9 +6,8 @@ import http from 'http';
 import { buildSchema } from 'type-graphql';
 import { FilmResolver } from './resolvers/Film';
 import { CutResolver } from './resolvers/Cut';
-import { UserResolver } from "./resolvers/User";
+import { UserResolver } from './resolvers/User';
 import { createDB } from './db/db-client';
-
 
 async function main() {
   await createDB();

@@ -1,4 +1,20 @@
-import { Stack, Box, Heading, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Stack,
+  Box,
+  Heading,
+  Text,
+  useColorModeValue,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Divider,
+  Button,
+} from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import {
+  LoginMutationVariables,
+} from '../../generated/graphql';
 
 export default function LoginForm(): React.ReactElement {
   return (
@@ -15,8 +31,64 @@ export default function LoginForm(): React.ReactElement {
         boxShadow={'lg'}
         p={8}
       >
-        아이디, 비밀번호 입력
+        <RealLoginForm />
       </Box>
     </Stack>
+  );
+}
+
+function RealLoginForm(): React.ReactElement {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginMutationVariables>();
+
+  const onSubmit = (formData: LoginMutationVariables) => {
+    console.log(formData);
+  };
+
+  return (
+    <Box
+      rounded={'lg'}
+      bg={useColorModeValue('white', 'gray.700')}
+      boxShadow={'lg'}
+      p={8}
+    >
+      <Stack as={'form'} spacing={4} onSubmit={handleSubmit(onSubmit)}>
+        <FormControl isInvalid={!!errors.loginInput?.emailOrUsername}>
+          <FormLabel>이메일 또는 아이디</FormLabel>
+          <Input
+            type="emailOrUsername"
+            placeholder="이메일 또는 아이디를 입력하세요."
+            {...register('loginInput.emailOrUsername', {
+              required: '이메일 또는 아이디를 입력해주세요',
+            })}
+          />
+          <FormErrorMessage>
+            {errors.loginInput?.emailOrUsername &&
+              errors.loginInput.emailOrUsername.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl isInvalid={!!errors.loginInput?.password}>
+          <FormLabel>비밀번호</FormLabel>
+          <Input
+            type="password"
+            placeholder="********"
+            {...register('loginInput.password', {
+              required: '비밀번호를 입력해주세요.',
+            })}
+          />
+          <FormErrorMessage>
+            {errors.loginInput?.password && errors.loginInput.password.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Divider />
+        <Button colorScheme="teal" type="submit">
+          로그인
+        </Button>
+      </Stack>
+    </Box>
   );
 }

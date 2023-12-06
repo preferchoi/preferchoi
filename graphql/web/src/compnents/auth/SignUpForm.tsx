@@ -54,8 +54,16 @@ function SignUpRealForm() {
         <Input
           type="email"
           placeholder="example@example.com"
-          {...register('signUpInput.email')}
-        />{' '}
+          {...register('signUpInput.email', {
+            required: '이메일을 입력해주세요.',
+            pattern: {
+              value:
+                // eslint-disable-next-line max-len
+                /^[a-zA-Z-0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: '이메일의 형식이 올바르지 않습니다.',
+            },
+          })}
+        />
         <FormErrorMessage>
           {errors.signUpInput?.email && errors.signUpInput.email.message}
         </FormErrorMessage>
@@ -65,7 +73,9 @@ function SignUpRealForm() {
         <Input
           type="text"
           placeholder="example"
-          {...register('signUpInput.username')}
+          {...register('signUpInput.username', {
+            required: '아이디를 입력해주세요.',
+          })}
         />
         <FormErrorMessage>
           {errors.signUpInput?.username && errors.signUpInput.username.message}
@@ -76,7 +86,17 @@ function SignUpRealForm() {
         <Input
           type="password"
           placeholder="8자 이상의 영문, 숫자, 특수문자"
-          {...register('signUpInput.password')}
+          {...register('signUpInput.password', {
+            required: '비밀번호를 입력해주세요.',
+            min: { value: 8, message: '비밀번호는 8자 이상이어야 합니다.' },
+            pattern: {
+              value:
+                // eslint-disable-next-line max-len
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
+              message:
+                '암호는 문자, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
+            },
+          })}
         />
         <FormErrorMessage>
           {errors.signUpInput?.password && errors.signUpInput.password.message}

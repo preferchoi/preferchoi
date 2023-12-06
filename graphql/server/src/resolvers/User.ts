@@ -9,6 +9,8 @@ import {
 import User from '../entities/User';
 import { IsEmail, IsString } from 'class-validator';
 import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
+import { createAccessToken } from '../utils/jwt-auth';
 
 @InputType({ description: '회원가입 인풋 데이터' })
 export class SignUpInput {
@@ -38,7 +40,7 @@ class LoginResponse {
   user?: User;
 
   @Field({ nullable: true })
-  accesToken?: string;
+  accessToken?: string;
 }
 
 @Resolver(User)
@@ -81,6 +83,8 @@ export class UserResolver {
         ],
       };
     }
-    return { user };
+
+    const accessToken = createAccessToken(user);
+    return { user, accessToken };
   }
 }

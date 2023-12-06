@@ -9,6 +9,7 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -16,6 +17,7 @@ import {
   useSignUpMutation,
   SignUpMutationVariables,
 } from '../../generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUpForm(): React.ReactElement {
   return (
@@ -43,12 +45,31 @@ function SignUpRealForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpMutationVariables>();
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const onSubmit = async (data: SignUpMutationVariables) => {
+    const { signUpInput } = data;
+    return signUp({ variables: { signUpInput } })
+      .then((res) => {
+        if (res.data?.signUp) {
+          toast({ title: '회원가입을 환영합니다!', status: 'success' });
+          navigate('/');
+        } else {
+          toast({
+            title: '회원가입 도중 문제가 발생했습니다.',
+            status: 'error',
+          });
+        }
+      })
+      .catch((err) => {
+        toast({ title: '이메일 또는 아이디가 중복됩니다.', status: 'error' });
+        return err;
+      });
+  };
+
   return (
-    <Stack
-      as={'form'}
-      spacing={4}
-      onSubmit={handleSubmit((data) => console.log(data))}
-    >
+    <Stack as={'form'} spacing={4} onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={!!errors.signUpInput?.email}>
         <FormLabel>이메일</FormLabel>
         <Input

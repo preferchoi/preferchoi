@@ -5,12 +5,17 @@ import {
   Mutation,
   ObjectType,
   Resolver,
+  Ctx,
+  Query,
+  UseMiddleware,
 } from 'type-graphql';
 import User from '../entities/User';
 import { IsEmail, IsString } from 'class-validator';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { createAccessToken } from '../utils/jwt-auth';
+import { MyContext } from '../apollo/createApolloServer';
+import { isAuthenticated } from "../middelwarers/isAuthenticated";
 
 @InputType({ description: '회원가입 인풋 데이터' })
 export class SignUpInput {
@@ -45,6 +50,13 @@ class LoginResponse {
 
 @Resolver(User)
 export class UserResolver {
+  
+  @UseMiddleware(isAuthenticated)
+  @Query(() => User, { nullable: true })
+  async me(@Ctx() ctx: MyContext): Promise<User | undefined> {
+    if (!ctx.verifiedUser) return undefined;
+    return User.findOne({ where: { id: ctx.verifiedUser.userId } });
+  }
   @Mutation(() => User)
   async signUp(@Arg('signUpInput') signUpInput: SignUpInput): Promise<User> {
     const { email, username, password } = signUpInput;

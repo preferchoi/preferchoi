@@ -78,7 +78,7 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   public async login(
     @Arg('loginInput') loginInput: LoginInput,
-    @Ctx() { res }: MyContext,
+    @Ctx() { res, redis }: MyContext,
   ): Promise<LoginResponse> {
     const { emailOrUsername, password } = loginInput;
 
@@ -102,7 +102,7 @@ export class UserResolver {
 
     const accessToken = createAccessToken(user);
     const refreshToken = createRefreshToken(user);
-
+    await redis.set(String(user.id), refreshToken);
     setRefreshTokenHeader(res, refreshToken);
 
     return { user, accessToken };

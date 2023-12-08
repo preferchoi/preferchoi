@@ -9,11 +9,13 @@ import {
   JwtVerifiedUser,
   verifyAccessTokenFromReqHeaders,
 } from '../utils/jwt-auth';
+import { redis } from '../redis/redis-client';
 
 export interface MyContext {
   req: Request;
   res: Response;
   verifiedUser: JwtVerifiedUser;
+  redis: typeof redis;
 }
 
 export const createApolloServer = async (): Promise<ApolloServer> => {
@@ -24,7 +26,7 @@ export const createApolloServer = async (): Promise<ApolloServer> => {
     plugins: [ApolloServerPluginLandingPageLocalDefault()],
     context: ({ req, res }) => {
       const verified = verifyAccessTokenFromReqHeaders(req.headers);
-      return { req, res, verifiedUser: verified };
+      return { req, res, verifiedUser: verified, redis };
     },
   });
 };

@@ -4,13 +4,18 @@ import {
   Button,
   Flex,
   Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { useMeQuery } from '../../generated/graphql';
+import { useMeQuery, useLogoutMutation } from '../../generated/graphql';
 import { useMemo } from 'react';
+import { useApolloClient } from '@apollo/client';
 
 export default function NavBar(): JSX.Element {
   const accessToken = localStorage.getItem('access_token');
@@ -52,29 +57,29 @@ export default function NavBar(): JSX.Element {
 
         {isLoggedIn ? (
           <LoggedInNavbarItem />
-        ): (
-        <Stack justify={'flex-end'} direction={'row'} spacing={6}>
-          <ColorModeSwitcher />
-          <Button
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            as={RouterLink}
-            to={'/login'}
-          >
-            로그인
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize="sm"
-            fontWeight={600}
-            colorScheme="teal"
-            as={RouterLink}
-            to={'/signup'}
-          >
-            시작하기
-          </Button>
-        </Stack>
+        ) : (
+          <Stack justify={'flex-end'} direction={'row'} spacing={6}>
+            <ColorModeSwitcher />
+            <Button
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              as={RouterLink}
+              to={'/login'}
+            >
+              로그인
+            </Button>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize="sm"
+              fontWeight={600}
+              colorScheme="teal"
+              as={RouterLink}
+              to={'/signup'}
+            >
+              시작하기
+            </Button>
+          </Stack>
         )}
       </Flex>
     </Box>
@@ -82,6 +87,19 @@ export default function NavBar(): JSX.Element {
 }
 
 const LoggedInNavbarItem = (): JSX.Element => {
+  const client = useApolloClient();
+  const [logout, { loading: logoutLoading }] = useLogoutMutation();
+
+  async function onLogoutCLick() {
+    try {
+      await logout();
+      localStorage.removeItem('access_token');
+      await client.resetStore();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Stack
       justify={'flex-end'}
@@ -90,7 +108,23 @@ const LoggedInNavbarItem = (): JSX.Element => {
       spacing={3}
     >
       <ColorModeSwitcher />
-      <Avatar size={'sm'} />
+
+      <Menu>
+        <MenuButton
+          as={Button}
+          rounded={'full'}
+          variant={'link'}
+          cursor={'pointer'}
+        >
+          <Avatar size={'sm'} />
+        </MenuButton>
+        <MenuList>
+          <MenuItem isDisabled={logoutLoading} onClick={onLogoutCLick}>
+            {' '}
+            로그아웃
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </Stack>
   );
 };

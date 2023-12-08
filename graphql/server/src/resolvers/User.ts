@@ -151,4 +151,16 @@ export class UserResolver {
 
     return { accessToken: newAccessToken };
   }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuthenticated)
+  async logout(
+    @Ctx() { verifiedUser, redis, res }: MyContext,
+  ): Promise<Boolean> {
+    if (verifiedUser) {
+      setRefreshTokenHeader(res, '');
+      await redis.del(String(verifiedUser.userId));
+    }
+    return true;
+  }
 }

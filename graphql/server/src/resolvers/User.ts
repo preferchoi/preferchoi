@@ -14,12 +14,14 @@ import { IsEmail, IsString } from 'class-validator';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import {
+  REFRESH_JWT_SECRET_KEY,
   createAccessToken,
   createRefreshToken,
   setRefreshTokenHeader,
 } from '../utils/jwt-auth';
 import { MyContext } from '../apollo/createApolloServer';
 import { isAuthenticated } from '../middelwarers/isAuthenticated';
+import { DEFAULT_JWT_SECRET_KEY } from '../utils/jwt-auth';
 
 @InputType({ description: '회원가입 인풋 데이터' })
 export class SignUpInput {
@@ -50,6 +52,11 @@ class LoginResponse {
 
   @Field({ nullable: true })
   accessToken?: string;
+}
+
+@ObjectType({ description: '액세스 토큰 새로고침 데이터' })
+class RefreshAccessTokenResponse {
+  @Field() accessToken: string;
 }
 
 @Resolver(User)
@@ -106,5 +113,42 @@ export class UserResolver {
     setRefreshTokenHeader(res, refreshToken);
 
     return { user, accessToken };
+  }
+
+  @Mutation(() => RefreshAccessTokenResponse, { nullable: true })
+  async refreshAccessToken(
+    @Ctx() { req, res, redis }: MyContext,
+  ): Promise<RefreshAccessTokenResponse | null> {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return null;
+
+    let tokenData: any = null;
+    try {
+      tokenData = jwt.verify(refreshToken, REFRESH_JWT_SECRET_KEY);
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+    if (!tokenData) return null;
+
+    const storedRefreshToken = await redis.get(String(tokenData.userId));
+    if (!storedRefreshToken) return null;
+    if (!(storedRefreshToken === refreshToken)) return null;
+
+    const user = await User.findOne({ where: { id: tokenData.userId } });
+    if (!user) return null;
+
+    const newAccessToken = createAccessToken(user);
+    const newRefreshToken = createRefreshToken(user);
+
+    await redis.set(String(user.id), newRefreshToken);
+
+    res.cookie('refreshtoken', newRefreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+    });
+
+    return { accessToken: newAccessToken };
   }
 }

@@ -2,8 +2,10 @@ import { AuthenticationError } from 'apollo-server-express';
 import { IncomingHttpHeaders } from 'http';
 import jwt from 'jsonwebtoken';
 import User from '../entities/User';
+import { Response } from 'express';
 
 export const DEFAULT_JWT_SECRET_KEY = 'secret';
+export const REFRESH_JWT_SECRET_KEY = 'secret2';
 
 export interface JwtVerifiedUser {
   userId: User['id'];
@@ -48,4 +50,24 @@ export const verifyAccessTokenFromReqHeaders = (
   } catch {
     return null;
   }
+};
+
+export const createRefreshToken = (user: User) => {
+  const userData: JwtVerifiedUser = { userId: user.id };
+  return jwt.sign(
+    userData,
+    process.env.REFRESH_JWT_SECRET_KEY || REFRESH_JWT_SECRET_KEY,
+    { expiresIn: '14d' },
+  );
+};
+
+export const setRefreshTokenHeader = (
+  res: Response,
+  refreshToken: string,
+): void => {
+  res.cookie('refreshtoken', refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV == 'production',
+    sameSite: 'lax',
+  });
 };

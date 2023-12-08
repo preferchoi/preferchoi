@@ -8,7 +8,6 @@ import {
 import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 import { createApolloCache } from './createApolloCache';
-import { request } from 'http';
 
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors) {
@@ -29,6 +28,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql',
+  credentials: 'include',
 });
 
 const authLink = setContext((request, prevContext) => {

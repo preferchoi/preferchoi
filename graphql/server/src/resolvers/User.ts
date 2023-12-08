@@ -13,9 +13,13 @@ import User from '../entities/User';
 import { IsEmail, IsString } from 'class-validator';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
-import { createAccessToken } from '../utils/jwt-auth';
+import {
+  createAccessToken,
+  createRefreshToken,
+  setRefreshTokenHeader,
+} from '../utils/jwt-auth';
 import { MyContext } from '../apollo/createApolloServer';
-import { isAuthenticated } from "../middelwarers/isAuthenticated";
+import { isAuthenticated } from '../middelwarers/isAuthenticated';
 
 @InputType({ description: '회원가입 인풋 데이터' })
 export class SignUpInput {
@@ -50,7 +54,6 @@ class LoginResponse {
 
 @Resolver(User)
 export class UserResolver {
-  
   @UseMiddleware(isAuthenticated)
   @Query(() => User, { nullable: true })
   async me(@Ctx() ctx: MyContext): Promise<User | undefined> {
@@ -75,6 +78,7 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   public async login(
     @Arg('loginInput') loginInput: LoginInput,
+    @Ctx() { res }: MyContext,
   ): Promise<LoginResponse> {
     const { emailOrUsername, password } = loginInput;
 
@@ -97,6 +101,10 @@ export class UserResolver {
     }
 
     const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
+
+    setRefreshTokenHeader(res, refreshToken);
+
     return { user, accessToken };
   }
 }

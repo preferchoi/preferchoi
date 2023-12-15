@@ -14,7 +14,7 @@ import { Film } from '../entities/Film';
 import ghibliData from '../data/ghibli';
 import { isAuthenticated } from '../middelwarers/isAuthenticated';
 import { MyContext } from 'src/apollo/createApolloServer';
-import { CutVote } from 'src/entities/CutVote';
+import { CutVote } from '../entities/CutVote';
 
 @Resolver(Cut)
 export class CutResolver {
@@ -31,6 +31,12 @@ export class CutResolver {
   @FieldResolver(() => Film, { nullable: true })
   film(@Root() cut: Cut): Film | undefined {
     return ghibliData.films.find((film) => film.id === cut.filmId);
+  }
+
+  @FieldResolver(() => Int)
+  async votesCount(@Root() cut: Cut): Promise<number> {
+    const count = await CutVote.count({ where: { cutId: cut.id } });
+    return count
   }
 
   @Mutation(() => Boolean)
@@ -50,6 +56,6 @@ export class CutResolver {
       await vote.save();
       return true;
     }
-    return false
+    return false;
   }
 }

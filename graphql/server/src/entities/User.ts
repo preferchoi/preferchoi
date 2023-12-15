@@ -6,7 +6,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+import { CutVote } from "./CutVote";
 
 @ObjectType()
 @Entity()
@@ -33,4 +35,7 @@ export default class User extends BaseEntity {
   @Field({ description: '수정일자' })
   @UpdateDateColumn({ comment: '수정일자' })
   updateAt: Date;
+
+  @OneToMany(() => CutVote, (cutVote) => cutVote.user)
+  cutVote:CutVote[]
 }

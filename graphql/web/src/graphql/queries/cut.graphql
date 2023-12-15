@@ -1,10 +1,13 @@
-query cut($cutId: Int!) {
+query Cut($cutId: Int!) {
   cut(cutId: $cutId) {
     id
     src
+    filmId
     film {
       id
       title
     }
+    votesCount
+    isVoted
   }
 }

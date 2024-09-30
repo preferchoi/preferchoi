@@ -33,6 +33,7 @@
 
   - react의 문법을 이해하고 사용할 수 있음.
   - react hook을 이해하고 사용 및 커스텀 할 수 있음.
+  - 가상 DOM의 사용 이유와
 
 - vue.js(중)
 
@@ -52,7 +53,6 @@
 
 - graphQL(중하)
   - 데이터 쿼리, 뮤테이션 작성 가능
-  -
 
 <br>
 
@@ -145,7 +145,7 @@ Python, openCV, express.js, javascripts, mediapipe, Docker
 
 # 개인 프로젝트 및 학습
 
-## [FACTORY](https://github.com/preferchoi/FACTORY)
+## [FACTORY](https://github.com/preferchoi/FACTORY) (2024.01.20. ~ 2024.02.20.)
 
 ### 1. 요약
 
@@ -162,7 +162,7 @@ fastAPI, vue.js, axios, vuetify(디자인)
 - vuex를 활용해 특정 status를 중앙 제어하여 컴포넌트 간 연동을 진행하였다.
 - vuetify를 활용해 디자인을 진행하였다.
 
-## [cocktails](https://github.com/preferchoi/cocktails)
+## [cocktails](https://github.com/preferchoi/cocktails) (2023.11.30. ~ 2023.12.20.)
 
 ### 1. 요약
 

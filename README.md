@@ -164,7 +164,7 @@ fastAPI, vue.js, axios, vuetify(디자인)
 
 ## [cocktails](https://github.com/preferchoi/cocktails) (2023.11.30. ~ 2023.12.20.)
 
-### [배포 링크](http://ec2-52-78-94-204.ap-northeast-2.compute.amazonaws.com/)
+### [배포 링크](http://preferchoi.site/)
 
 ### 1. 요약
 

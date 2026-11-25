@@ -145,23 +145,6 @@ Python, openCV, express.js, javascripts, mediapipe, Docker
 
 # 개인 프로젝트 및 학습
 
-## [FACTORY](https://github.com/preferchoi/FACTORY) (2024.01.20. ~ 2024.02.20.)
-
-### 1. 요약
-
-fastAPI와 vue.js를 활용한 공장 시뮬레이터 프로젝트
-
-### 2. 기술 스택
-
-fastAPI, vue.js, axios, vuetify(디자인)
-
-### 3. 학습 내용
-
-- fastAPI를 활용해 서버를 제작했다.
-- asyncio를 활용해 api가 비동기로 운용되도록 제작하였다.
-- vuex를 활용해 특정 status를 중앙 제어하여 컴포넌트 간 연동을 진행하였다.
-- vuetify를 활용해 디자인을 진행하였다.
-
 ## [cocktails](https://github.com/preferchoi/cocktails) (2023.11.30. ~ 2023.12.20.)
 
 ### [배포 링크](https://preferchoi.site/)
@@ -182,39 +165,6 @@ graphQL, react.js, express.js, apollo, react-waypoint, chakra-ui(디자인)
 - redis를 활용해 refreshToken을 관리하였다.
 - apollo cache를 활용해 특정 쿼리를 추가 파라미터를 이용해 구분하여 캐싱을 진행하였다.
 - chakra-ui를 활용해 디자인을 진행하였다.
-
-## [memoirs_AI](https://github.com/preferchoi/memoirs_AI)
-
-### 1. 요약
-
-chatGPT API를 활용한 AI 회고록 서비스
-
-### 2. 기술 스택
-
-react.js
-
-### 3. 학습 내용
-
-- vite를 이용한 프로젝트 생성과 create react app으로 생성한 프로젝트와의 차이에 대해 학습했다.
-- chatGPT API 사용법에 대해 학습했다.
-
-## [websocketPJT](https://github.com/preferchoi/websocketPJT) (2023.10.20. ~ 2023.11.06.)
-
-### 1. 요약
-
-socket.io를 이용한 채팅 서비스 웹
-
-### 2. 기술 스택
-
-express.js, react.js, socket.io, socket.io-client, sharp.js
-
-### 3. 학습 내용
-
-- 풀스택 개발 과정의 장점과 그 책임에 대해 이해할 수 있었다.
-- socket.io를 활용한 웹 소켓 작동에 대해 이해할 수 있었다.
-- socket.io의 room 기능과 동적 라우팅을 사용한 namespace 배정의 차이와 장단점에 대해 이해했다.
-- 디바운싱과 쓰로틀링의 차이를 알고, 해당 기능을 작성할 수 있게 되었다.
-- sharp.js를 사용한 이미지 조작을 경험했다.
 
 <br>
 
